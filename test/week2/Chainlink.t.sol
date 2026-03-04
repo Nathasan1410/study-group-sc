@@ -8,8 +8,8 @@ import {Chainlink} from "@src/week2/Chainlink.sol";
 // forge test --match-contract ChainlinkTest
 contract ChainlinkTest is Test {
     Chainlink public chainlink;
-    Chainlink public chainlinkBTC;
-    Chainlink public chainlinkETH;
+    Chainlink public chainlinkBtc;
+    Chainlink public chainlinkEth;
 
     address public constant BTC_USD = 0x0FB99723Aee6f420beAD13e6bBB79b7E6F034298;
     address public constant ETH_USD = 0x4aDC67696bA383F43DD60A9e78F2C97Fbbfc7cb1;
@@ -20,8 +20,8 @@ contract ChainlinkTest is Test {
     function setUp() public {
         vm.createSelectFork("base_testnet");
         chainlink = new Chainlink(BTC_USD);
-        chainlinkBTC = new Chainlink(BTC_USD);
-        chainlinkETH = new Chainlink(ETH_USD);
+        chainlinkBtc = new Chainlink(BTC_USD);
+        chainlinkEth = new Chainlink(ETH_USD);
     }
 
     // RUN
@@ -48,8 +48,8 @@ contract ChainlinkTest is Test {
     // RUN
     // forge test --match-contract ChainlinkTest --match-test testEthToBtcCalculator -vvv
     function testEthToBtcCalculator() public view {
-        (, int256 priceBtc,,,) = chainlinkBTC.latestRoundData();
-        (, int256 priceEth,,,) = chainlinkETH.latestRoundData();
+        (, int256 priceBtc,,,) = chainlinkBtc.latestRoundData();
+        (, int256 priceEth,,,) = chainlinkEth.latestRoundData();
 
         // forge-lint: disable-next-line(unsafe-typecast)
         uint256 result = uint256(priceBtc) * 10 ** uint256(ETH_DECIMALS) / uint256(priceEth);
@@ -59,8 +59,8 @@ contract ChainlinkTest is Test {
     // RUN
     // forge test --match-contract ChainlinkTest --match-test testBtcToEthCalculator -vvv
     function testBtcToEthCalculator() public view {
-        (, int256 priceBtc,,,) = chainlinkBTC.latestRoundData();
-        (, int256 priceEth,,,) = chainlinkETH.latestRoundData();
+        (, int256 priceBtc,,,) = chainlinkBtc.latestRoundData();
+        (, int256 priceEth,,,) = chainlinkEth.latestRoundData();
 
         // forge-lint: disable-next-line(unsafe-typecast)
         uint256 result = uint256(priceEth) * 10 ** uint256(BTC_DECIMALS) / uint256(priceBtc);

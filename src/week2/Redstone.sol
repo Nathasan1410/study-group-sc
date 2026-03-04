@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
-import "./interfaces/IRedstone.sol";
+import {IRedstone} from "./interfaces/IRedstone.sol";
 
 contract Redstone {
     IRedstone public priceFeed;

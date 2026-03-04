@@ -23,8 +23,10 @@ contract OraklTest is Test {
         (, int256 price,) = orakl.latestRoundData();
         uint8 decimals = orakl.decimals();
         // DECIMALS
+        // forge-lint: disable-next-line(unsafe-typecast)
         console.log(uint256(price) / (10 ** uint256(decimals)));
         // NON DECIMALS
+        // forge-lint: disable-next-line(unsafe-typecast)
         console.log(uint256(price));
     }
 }
